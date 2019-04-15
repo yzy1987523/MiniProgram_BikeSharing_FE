@@ -1,11 +1,13 @@
 <map
   id="myMap"
-  longitude='{{longitude}}'
-  latitude='{{latitude}}'
-  controls='{{controls}}'
-  show-show-location='true'
+  longitude='{{longitude0}}'
+  latitude='{{latitude0}}'
+  controls='{{controls}}' 
+  show-location='true'
   scale='17'
-  bindcallouttap='controltap'
+  bindcontroltap='controltap'
   style='width:100%;height:100%'
+  markers="{{markers}}"
+  bindregionchange='regionchange'
 >
 </map>
