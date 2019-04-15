@@ -110,7 +110,7 @@ Page({
 
     // 发送手机号和验证码进行校验
     wx.request({
-      url: "http://localhost:8080/user/verify",
+      url: "http://localhost:80/user/verify",
       // 修改请求头类型
       header: { 'content-type': 'application/x-www-form-urlencoded' },
       data: {
@@ -123,7 +123,7 @@ Page({
         if (res.data) {
           wx.request({
             // 微信小程序成产环境请求的协议必须是https，地址必须是域名，不能带端口号
-            url: "http://localhost:8080/user/register",
+            url: "http://localhost:80/user/register",
             header: { 'content-type': 'application/x-www-form-urlencoded' },
             method: 'POST',
             // data: e.detail.value,
