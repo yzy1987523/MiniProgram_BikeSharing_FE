@@ -1,3 +1,4 @@
+var myUtil=require("../../utils/myUtil.js")
 Page({
 
   /**
@@ -100,12 +101,17 @@ Page({
         }
       case 2:
         {
+          
+          var status=myUtil.get("status")
           //根据用户状态进入不同页面
-          var status = getApp().globalData.status;
           //跳转到注册页面
           if (status == 0) {
             wx.navigateTo({
               url: '../register/register', //..是上级目录
+            })
+          } else if (status == 1) {
+            wx.navigateTo({
+              url: '../deposite/deposite',
             })
           }
           break;
@@ -132,10 +138,11 @@ Page({
               // })
               //发送请求：将添加的单车数据发送到后台（SpringBoot）
               wx.request({
-                url: 'http://localhost:80/addBike',
+                url: 'http://localhost:80/bike/add',
                 data: {
                   longitude: log,
-                  latitude: lat
+                  latitude: lat,
+                  status: 0
                 },
                 method: 'POST',
                 success: function(res) {

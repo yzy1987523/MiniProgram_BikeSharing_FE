@@ -2,6 +2,7 @@
   "pages":[
     "pages/index/index",
     "pages/register/register",
+    "pages/deposite/deposite",
     "pages/logs/logs"    
   ],
   "window":{
