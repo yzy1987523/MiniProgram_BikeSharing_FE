@@ -21,7 +21,7 @@ Page({
         that.setData({
           longitude0: res.longitude,
           latitude0: res.latitude
-        })
+        })       
       },
     })
     wx.getSystemInfo({
@@ -31,7 +31,7 @@ Page({
         that.setData({
           controls: [{
               id: 1,
-              iconPath: '/images/p1.png',
+              iconPath: '/images/img1.png',
               position: {
                 width: 40,
                 height: 40,
@@ -42,7 +42,7 @@ Page({
             },
             {
               id: 2,
-              iconPath: '/images/p2.png',
+              iconPath: '/images/qrcode.png',
               position: {
                 width: 100,
                 height: 40,
@@ -53,7 +53,7 @@ Page({
             },
             {
               id: 3,
-              iconPath: '/images/p3.png',
+              iconPath: '/images/pay.png',
               position: {
                 width: 40,
                 height: 40,
@@ -64,7 +64,7 @@ Page({
             },
             {
               id: 4,
-              iconPath: '/images/p4.png',
+              iconPath: '/images/warn.png',
               position: {
                 width: 40,
                 height: 40,
@@ -75,12 +75,23 @@ Page({
             },
             {
               id: 5,
-              iconPath: '/images/p4.png',
+              iconPath: '/images/add.png',
               position: {
                 width: 40,
                 height: 40,
                 left: 20,
                 top: 20,
+              },
+              clickable: true,
+            },
+            {
+              id: 6,
+              iconPath: '/images/location.png',
+              position: {
+                width: 20,
+                height: 35,
+                left: windWidth*0.5-10,
+                top: windHeight*0.5-35,
               },
               clickable: true,
             },
@@ -111,7 +122,11 @@ Page({
             })
           } else if (status == 1) {
             wx.navigateTo({
-              url: '../deposite/deposite',
+              url: '../deposite/deposit',
+            })
+          } else if (status == 2) {
+            wx.navigateTo({
+              url: '../identify/identify',
             })
           }
           break;
@@ -207,3 +222,32 @@ Page({
 
   }
 })
+// 自定义方法
+function findBikes(longitude, latitude, that) {
+  wx.request({
+    url: 'http://localhost:80/bike/findNear',
+    method: 'GET',
+    data: {
+      longitude: longitude,
+      latitude: latitude
+    },
+    success: function (res) {
+      var bikes = res.data.map((geoResult) => {
+        return {
+          longitude: geoResult.content.location[0],
+          latitude: geoResult.content.location[1],
+          iconPath: '/images/bike.png',
+          width: 35,
+          height: 40,
+          id: geoResult.content.id
+        }
+      })
+
+      // 将bike数组set到当前页面的marker
+      that.setData({
+        markers: bikes
+      })
+
+    }
+  })
+}

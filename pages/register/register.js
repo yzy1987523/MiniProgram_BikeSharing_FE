@@ -160,7 +160,7 @@ Page({
 
                 // 跳转到充值页面
                 wx.navigateTo({
-                  url: '../deposite/deposite',
+                  url: '../deposite/deposit',
                 })
 
               } else {
